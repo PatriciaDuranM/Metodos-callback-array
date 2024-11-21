@@ -40,6 +40,20 @@ Mayus(letters);
 /* 4.Crea una función que reciba un array de palabras y una letra. La función devolverá un array con las palabras que comiencen por esa letra, si no hay mostrará un mensaje por consola diciendo que ninguna palabra coincide. Tiene que funcionar con mayúsculas y minúsculas.*/
 console.log("Ejercicio4");
 
+const filterWords = (words, letter) => {
+  const filteredWords = words.filter((item) => {
+    return item.toLowerCase().startsWith(letter.toLowerCase());
+  });
+
+  if (filteredWords.length > 0) {
+    return filteredWords;
+  }
+  console.log("No hay palabras que empiece por la letra " + letter);
+};
+
+const resultFilter = filterWords(["hola", "adios", "amar"], "a");
+console.log(resultFilter);
+
 /*5.Crea una función que reciba un array de 10 números e imprima por consola la suma de todos los valores del array.*/
 console.log("Ejercicio5");
 
@@ -67,24 +81,27 @@ const operations = (tenNumbers) => {
 };
 operations(tenNumbers);
 
-/*7.Crea una función que reciba una palabra e imprima por consola esa palabra pero con las vocales en mayúscula. ????*/
+/*7.Crea una función que reciba una palabra e imprima por consola esa palabra pero con las vocales en mayúscula. ????
+REduce mete los valores a uno*/
 console.log("Ejercicio 7");
 
 const mayusVowels = (word) => {
   const vocals = ["a", "e", "i", "o", "u", "á", "é", "í", "ó", "ú"];
-  word.split("").map((letra) => {
-    // Cambié "slpit" por "split"
+
+  const nuevaPalabra = word.split("").reduce((palabraFinal, letra) => {
     if (vocals.includes(letra.toLowerCase())) {
-      console.log(letra.toUpperCase());
+      return palabraFinal + letra.toUpperCase();
     } else {
-      console.log(letra);
+      return palabraFinal + letra;
     }
   });
+  console.log(nuevaPalabra);
 };
 
 mayusVowels("murcielago");
 
-console.log("Ejercicio 10");
+/*antiguo*/
+console.log("Ejercicio atiguo");
 const vocalMayus = (word) => {
   const vocals = ["a", "e", "i", "o", "u"];
   let newWord = "";
@@ -109,11 +126,21 @@ console.log(mayorCinco);
 /*9.Crea una función que reciba un array de 5 palabras y un número y te devuelva un array con las palabras que tienen esa longitud, por ejemplo si le envias (['hola', 'adios', 'gato', 'perro', 'casa'], 4), te devolverá un array con ['hola', 'gato', 'casa']*/
 console.log("ejercicio 9");
 
+const ejercicio9 = (words, number) => {
+  const filter = words.filter((word) => {
+    return word.length === number;
+  });
+
+  console.log(filter);
+};
+
+ejercicio9(["hola", "adios", "gato", "perro", "casa"], 4);
+
 /* ????? 10.Crea una función que reciba un array de números y un número y te devuelva un array con los números que sean divisores de ese número*/
 console.log("ejercicio 10");
 
 const division = (array, number) => {
-  return array.filter((elementoarray) => number % elementoarray === 0);
+  return array.filter((elementoarray) => elementoarray % number === 0);
 };
 
 const arraydiez = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -137,13 +164,22 @@ console.log(edad(array));
 /*12. Crea una función que reciba un array con 5 números y te diga si todos son pares o no.*/
 console.log("Ejercicio 12");
 
-const fiveNumber = [1, 2, 3, 4, 5];
+const fiveNumber = [4, 2, 6, 4, 8];
 
-const even = (fiveNumber) => {
-  fiveNumber.only((number) => number % 2 === 0);
+const even = (numbers) => {
+  const isEven = numbers.every((number) => number % 2 === 0);
+  if (isEven) {
+    console.log("Todos son pares");
+  } else {
+    console.log("Alguno es impar");
+  }
 };
 
-/*13. Crea una función que reciba un array de 5 palabras y las ordene en base a su longitud, de menor a mayor.*/
+even(fiveNumber);
+
+/*13. Crea una función que reciba un array de 5 palabras y las ordene en base a su longitud, de menor a mayor.
+Para numeros sort siempre resta y si hay letras locale */
+
 console.log("Ejercicio 13");
 
 const cincoPalabras = ["cabra", "ajo", "pimienta", "curry", "oregano"];
@@ -154,9 +190,21 @@ const order = (array) => {
 
 console.log(order(cincoPalabras));
 
-/*14. ?  Crea una función que reciba una palabra e imprima la misma palabra en orden inverso conservando las mayúsculas y las minúsculas. Si recibe "Mariposas" deberá imprimir "sasopiraM". No se puede usar reverse()*/
+/*14. ?  Crea una función que reciba una palabra e imprima la misma palabra en orden inverso conservando las mayúsculas y las minúsculas. Si recibe "Mariposas" deberá imprimir "sasopiraM". No se puede usar reverse()
+se hace con reduce, hay varios caracteres */
+console.log("Ejercicio 14");
 
-console.log("Ejercicio bucle");
+const rev = (palabra) => {
+  const result = palabra
+    .split("")
+    .reduce((counter, letter) => letter + counter);
+
+  console.log(result);
+};
+
+rev("Mariposa");
+
+console.log("Ejercicio antiguo bucle");
 const reverseWord = (word) => {
   let result = "";
   for (let index = word.length - 1; index >= 0; index--) {
@@ -170,39 +218,52 @@ reverseWord("sopa");
 
 /*15. Crea una función que reciba un array de 5 números de 2 dígitos. La función debe ser capaz de sumar los digitos de cada número, es decir si yo le envío [21, 34, 87, 10, 28] la función tendrá que ser capaz de devolverme un array con [3, 7, 15, 1, 10]*/
 
-/*16.Utilizando el array a continuación, crea una función que reciba un id de usuario y borre ese usuario del array.
+console.log("Ejercicio 15");
 
-    [
-    {
+const sum = (numbers) => {};
+
+sum([21, 53, 10, 31, 81]);
+/*16.Utilizando el array a continuación, crea una función que reciba un id de usuario y borre ese usuario del array.*/
+
+const users = [
+  {
     id: "user001",
     name: "Juan",
     surname: "Pérez",
-    age: 30
-    },
-    {
+    age: 30,
+  },
+  {
     id: "user002",
     name: "María",
     surname: "González",
-    age: 25
-    },
-    {
+    age: 25,
+  },
+  {
     id: "user003",
     name: "Pedro",
     surname: "Sánchez",
-    age: 35
-    },
-    {
+    age: 35,
+  },
+  {
     id: "user004",
     name: "Ana",
     surname: "Martínez",
-    age: 28
-    },
-    {
+    age: 28,
+  },
+  {
     id: "user005",
     name: "Luis",
     surname: "López",
-    age: 40
-    }
-    ];
+    age: 40,
+  },
+];
 
-    */
+console.log("Ejercicio 16");
+
+const eraseUser = (id) => {
+  const filter = users.filter((item) => item.id !== id);
+
+  console.log(filter);
+};
+
+eraseUser("user004");
