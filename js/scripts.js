@@ -220,9 +220,17 @@ reverseWord("sopa");
 
 console.log("Ejercicio 15");
 
-const sum = (numbers) => {};
+const suma = (numbers) => {
+  const result = numbers.map((number) => {
+    const primerDigito = String(number).charAt(0);
+    const segundoDigito = String(number).charAt(1);
+    return Number(primerDigito) + Number(segundoDigito);
+  });
+  console.log(result);
+};
 
-sum([21, 53, 10, 31, 81]);
+suma([21, 53, 10, 31, 81]);
+
 /*16.Utilizando el array a continuación, crea una función que reciba un id de usuario y borre ese usuario del array.*/
 
 const users = [
